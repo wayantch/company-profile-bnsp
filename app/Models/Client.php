@@ -1,0 +1,50 @@
+<?php
+
+namespace App\Models;
+
+use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
+
+class Client extends Model
+{
+    protected $fillable = [
+        'name',
+        'logo_path',
+        'website',
+        'description',
+        'order',
+    ];
+
+    protected $casts = [
+        'order' => 'integer',
+    ];
+
+    public function getLogoPathAttribute($value)
+    {
+        if (empty($value)) {
+            return null;
+        }
+
+        $path = str_replace('\\\\', '/', $value);
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            $urlPath = parse_url($path, PHP_URL_PATH);
+
+            return $urlPath ?: $path;
+        }
+
+        if (str_starts_with($path, '/storage/')) {
+            return $path;
+        }
+
+        if (str_starts_with($path, 'storage/')) {
+            return '/' . $path;
+        }
+
+        if (str_starts_with($path, 'public/')) {
+            return Storage::url(str_replace('public/', '', $path));
+        }
+
+        return Storage::url(ltrim($path, '/'));
+    }
+}
