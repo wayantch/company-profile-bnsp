@@ -15,23 +15,23 @@ const formatDate = (value) => {
 
 export default function Index({ events }) {
     return (
-        <PublicLayout title="Event">
-            <section className="bg-[#0A0F1E]">
+        <PublicLayout title="Acara">
+            <section className="bg-base">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
-                    <p className="text-xs uppercase tracking-[0.3em] text-cyan-200">
-                        Event
+                    <p className="text-xs uppercase tracking-[0.3em] text-primary">
+                        Acara
                     </p>
-                    <h1 className="mt-3 text-4xl font-semibold text-white sm:text-5xl">
-                        Agenda kegiatan dan workshop
+                    <h1 className="mt-3 text-4xl font-semibold text-text sm:text-5xl">
+                        Agenda kegiatan dan lokakarya
                     </h1>
 
                     <div className="mt-10 grid gap-6 md:grid-cols-2 xl:grid-cols-3">
                         {(events?.data || []).map((event) => (
                             <article
                                 key={event.id}
-                                className="overflow-hidden rounded-3xl border border-white/10 bg-white/5"
+                                className="overflow-hidden rounded-3xl border border-border bg-surface/80 shadow-sm shadow-ink/5 backdrop-blur-sm"
                             >
-                                <div className="aspect-[16/10] bg-white/5">
+                                <div className="aspect-[16/10] bg-secondary/60">
                                     {event.thumbnail ? (
                                         <img
                                             src={event.thumbnail}
@@ -39,8 +39,8 @@ export default function Index({ events }) {
                                             className="h-full w-full object-cover"
                                         />
                                     ) : (
-                                        <div className="flex h-full items-center justify-center bg-gradient-to-br from-slate-800/80 to-slate-900 text-xs uppercase tracking-[0.24em] text-slate-300">
-                                            Event
+                                        <div className="flex h-full items-center justify-center bg-gradient-to-br from-secondary/70 to-surface text-xs uppercase tracking-[0.24em] text-muted">
+                                            Acara
                                         </div>
                                     )}
                                 </div>
@@ -48,33 +48,33 @@ export default function Index({ events }) {
                                 <div className="p-6">
                                     <div className="flex flex-col gap-3 sm:flex-row sm:items-start sm:justify-between">
                                         <div>
-                                            <p className="text-xs uppercase tracking-[0.25em] text-slate-400">
+                                            <p className="text-xs uppercase tracking-[0.25em] text-muted">
                                                 {formatDate(event.event_date)}
                                             </p>
-                                            <h2 className="mt-3 text-2xl font-semibold text-white">
+                                            <h2 className="mt-3 text-2xl font-semibold text-text">
                                                 {event.title}
                                             </h2>
                                         </div>
-                                        <p className="text-sm text-cyan-300 [overflow-wrap:anywhere]">
-                                            {event.location || "TBA"}
+                                        <p className="text-sm text-primary [overflow-wrap:anywhere]">
+                                            {event.location || "Akan diumumkan"}
                                         </p>
                                     </div>
 
-                                    <p className="mt-4 line-clamp-5 [overflow-wrap:anywhere] text-sm leading-7 text-slate-300">
+                                    <p className="mt-4 line-clamp-5 [overflow-wrap:anywhere] text-sm leading-7 text-muted">
                                         {event.description}
                                     </p>
                                     <Link
                                         href={route("events.show", event.id)}
-                                        className="mt-5 inline-block text-sm text-cyan-300 hover:text-cyan-200"
+                                        className="mt-5 inline-block text-sm text-primary hover:text-primary-700"
                                     >
-                                        Lihat detail event
+                                        Lihat detail acara
                                     </Link>
                                 </div>
                             </article>
                         ))}
                         {!events?.data?.length && (
-                            <div className="rounded-3xl border border-dashed border-white/10 bg-white/5 p-6 text-sm text-slate-400 md:col-span-2 xl:col-span-3">
-                                Belum ada event yang dipublikasikan.
+                            <div className="rounded-3xl border border-dashed border-border bg-surface/80 p-6 text-sm text-muted md:col-span-2 xl:col-span-3">
+                                Belum ada acara yang dipublikasikan.
                             </div>
                         )}
                     </div>
@@ -86,7 +86,7 @@ export default function Index({ events }) {
                                     key={index}
                                     href={link.url || ""}
                                     preserveScroll
-                                    className={`rounded-lg border px-4 py-2 text-sm transition ${link.active ? "border-cyan-400 bg-cyan-400 text-[#0A0F1E]" : "border-white/10 bg-white/5 text-white"}`}
+                                    className={`rounded-lg border px-4 py-2 text-sm transition ${link.active ? "border-primary bg-primary text-white" : "border-border bg-surface text-text"}`}
                                     dangerouslySetInnerHTML={{
                                         __html: link.label,
                                     }}

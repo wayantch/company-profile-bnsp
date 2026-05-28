@@ -35,7 +35,7 @@ export default function Show({ article, relatedArticles = [] }) {
 
             <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1fr_0.4fr]">
-                    <Card className="overflow-hidden border-stone-200 bg-white shadow-sm">
+                    <Card className="overflow-hidden border-border/80 bg-surface/90 shadow-sm shadow-ink/5">
                         {article.thumbnail && (
                             <img
                                 src={article.thumbnail}
@@ -56,23 +56,21 @@ export default function Show({ article, relatedArticles = [] }) {
                                             : "muted"
                                     }
                                 >
-                                    {article.is_published
-                                        ? "Published"
-                                        : "Draft"}
+                                    {article.is_published ? "Terbit" : "Draf"}
                                 </Badge>
                             </div>
 
-                            <h2 className="mt-4 text-3xl font-semibold tracking-tight text-stone-900">
+                            <h2 className="mt-4 text-3xl font-bold tracking-tight text-text">
                                 {article.title}
                             </h2>
 
-                            <div className="mt-4 flex flex-wrap gap-4 text-sm text-stone-500">
+                            <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted">
                                 <span>Oleh {article.author || "Admin"}</span>
                                 <span>{formatDate(article.created_at)}</span>
                                 <span>Slug: {article.slug}</span>
                             </div>
 
-                            <div className="mt-8 whitespace-pre-wrap rounded-3xl border border-stone-200 bg-stone-50 p-5 text-sm leading-8 text-stone-700">
+                            <div className="mt-8 whitespace-pre-wrap rounded-3xl border border-border bg-base/80 p-5 text-sm leading-8 text-text/80">
                                 {article.content}
                             </div>
 
@@ -82,13 +80,13 @@ export default function Show({ article, relatedArticles = [] }) {
                                         "admin.articles.edit",
                                         article.id,
                                     )}
-                                    className="rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-50 transition hover:bg-stone-800"
+                                    className="rounded-2xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
                                 >
                                     Edit Artikel
                                 </Link>
                                 <Link
                                     href={route("admin.articles.index")}
-                                    className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                    className="rounded-2xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                 >
                                     Kembali
                                 </Link>
@@ -97,9 +95,9 @@ export default function Show({ article, relatedArticles = [] }) {
                     </Card>
 
                     <aside className="space-y-4">
-                        <Card className="border-stone-200 bg-white p-6 shadow-sm">
-                            <p className="text-xs uppercase tracking-[0.25em] text-stone-500">
-                                Related Articles
+                        <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
+                            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
+                                Artikel Terkait
                             </p>
                             <div className="mt-4 space-y-4">
                                 {relatedArticles.length ? (
@@ -110,18 +108,18 @@ export default function Show({ article, relatedArticles = [] }) {
                                                 "admin.articles.show",
                                                 item.id,
                                             )}
-                                            className="block rounded-2xl border border-stone-200 bg-stone-50 p-4 transition hover:border-stone-400 hover:bg-white"
+                                            className="block rounded-2xl border border-border bg-base/80 p-4 transition hover:-translate-y-0.5 hover:border-primary/20 hover:bg-secondary/50"
                                         >
-                                            <p className="text-xs uppercase tracking-[0.22em] text-stone-500">
+                                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">
                                                 {item.category}
                                             </p>
-                                            <p className="mt-2 text-sm font-semibold text-stone-900">
+                                            <p className="mt-2 text-sm font-semibold text-text">
                                                 {item.title}
                                             </p>
                                         </Link>
                                     ))
                                 ) : (
-                                    <p className="text-sm text-stone-500">
+                                    <p className="text-sm text-muted">
                                         Belum ada artikel terkait.
                                     </p>
                                 )}

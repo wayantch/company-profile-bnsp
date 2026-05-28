@@ -21,17 +21,20 @@ export default function Show({ product }) {
 
             <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-                    <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                    <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                         <div className="flex items-center justify-between gap-4">
                             <div>
-                                <h3 className="text-lg font-semibold text-stone-900">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                    Produk
+                                </p>
+                                <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                     Detail Produk
                                 </h3>
-                                <p className="mt-1 text-sm text-stone-500">
+                                <p className="mt-2 text-sm leading-6 text-muted">
                                     Informasi lengkap produk.
                                 </p>
                             </div>
-                            <Badge variant="muted">Show</Badge>
+                            <Badge variant="muted">Detail</Badge>
                         </div>
 
                         <div className="mt-6 space-y-4">
@@ -46,10 +49,10 @@ export default function Show({ product }) {
                             )}
 
                             <div>
-                                <h4 className="text-lg font-semibold text-stone-900">
+                                <h4 className="text-lg font-semibold tracking-tight text-text">
                                     Deskripsi
                                 </h4>
-                                <p className="mt-2 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-7 text-stone-700">
+                                <p className="mt-2 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-7 text-text/80">
                                     {product.full_description ||
                                         "Tidak ada deskripsi."}
                                 </p>
@@ -59,30 +62,30 @@ export default function Show({ product }) {
                         <div className="mt-6 flex gap-3">
                             <Link
                                 href={route("admin.products.edit", product.id)}
-                                className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                className="rounded-2xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90"
                             >
                                 Edit
                             </Link>
                             <Link
                                 href={route("admin.products.index")}
-                                className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                className="rounded-2xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                             >
                                 Kembali
                             </Link>
                         </div>
                     </Card>
 
-                    <Card className="overflow-hidden border-stone-200 bg-[#0F172A] p-6 text-stone-100 shadow-sm">
-                        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
+                    <Card className="overflow-hidden border-border/80 bg-surface/90 p-6 text-text shadow-sm shadow-ink/5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Meta
                         </p>
-                        <div className="mt-3 text-sm text-stone-300">
+                        <div className="mt-3 text-sm text-text/80">
                             <div>Icon: {product.icon || "-"}</div>
                             <div className="mt-2">
                                 Order: {product.order ?? 0}
                             </div>
                             <div className="mt-2">
-                                Featured: {product.is_featured ? "Yes" : "No"}
+                                Featured: {product.is_featured ? "Ya" : "Tidak"}
                             </div>
                         </div>
                     </Card>

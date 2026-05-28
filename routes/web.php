@@ -20,7 +20,7 @@ use Illuminate\Support\Facades\Route;
 // Public routes (no auth)
 Route::get('/', [HomeController::class, 'index'])->name('home');
 Route::get('/about', [PageController::class, 'about'])->name('about');
-Route::get('/visi-misi', [PageController::class, 'visiMisi'])->name('visi-misi');
+Route::redirect('/visi-misi', '/about');
 Route::get('/produk', [PageController::class, 'produk'])->name('produk');
 Route::get('/kontak', [PageController::class, 'kontak'])->name('kontak');
 Route::post('/kontak', [PageController::class, 'sendKontak'])->name('kontak.send');

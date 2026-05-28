@@ -16,16 +16,16 @@ const formatDate = (value) => {
 export default function Show({ event, relatedEvents = [] }) {
     return (
         <PublicLayout title={event.title}>
-            <section className="bg-[#0A0F1E]">
+            <section className="bg-base">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
                     <Link
                         href={route("events.index")}
-                        className="inline-flex items-center rounded-full border border-white/15 bg-white/5 px-4 py-2 text-sm text-slate-200 transition hover:border-cyan-300 hover:text-cyan-200"
+                        className="inline-flex items-center rounded-full border border-border bg-surface px-4 py-2 text-sm text-text transition hover:border-primary/30 hover:text-primary"
                     >
-                        Kembali ke daftar event
+                        Kembali ke daftar acara
                     </Link>
 
-                    <article className="mt-8 overflow-hidden rounded-3xl border border-white/10 bg-white/5">
+                    <article className="mt-8 overflow-hidden rounded-3xl border border-border bg-surface/80 shadow-sm shadow-ink/5 backdrop-blur-sm">
                         {event.thumbnail && (
                             <img
                                 src={event.thumbnail}
@@ -35,25 +35,25 @@ export default function Show({ event, relatedEvents = [] }) {
                         )}
 
                         <div className="p-6 sm:p-8">
-                            <p className="text-xs uppercase tracking-[0.25em] text-cyan-200">
+                            <p className="text-xs uppercase tracking-[0.25em] text-primary">
                                 {formatDate(event.event_date)}
                             </p>
-                            <h1 className="mt-4 text-3xl font-semibold text-white sm:text-5xl">
+                            <h1 className="mt-4 text-3xl font-semibold text-text sm:text-5xl">
                                 {event.title}
                             </h1>
-                            <p className="mt-4 text-sm text-cyan-300 [overflow-wrap:anywhere]">
+                            <p className="mt-4 text-sm text-primary [overflow-wrap:anywhere]">
                                 {event.location || "Lokasi akan diumumkan"}
                             </p>
 
-                            <div className="mt-8 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-8 text-slate-300">
+                            <div className="mt-8 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-8 text-muted">
                                 {event.description}
                             </div>
                         </div>
                     </article>
 
                     <div className="mt-10">
-                        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
-                            Event Lainnya
+                        <p className="text-xs uppercase tracking-[0.28em] text-primary">
+                            Acara Lainnya
                         </p>
                         <div className="mt-5 grid gap-4 md:grid-cols-3">
                             {relatedEvents.length ? (
@@ -61,22 +61,22 @@ export default function Show({ event, relatedEvents = [] }) {
                                     <Link
                                         key={item.id}
                                         href={route("events.show", item.id)}
-                                        className="rounded-3xl border border-white/10 bg-white/5 p-5 transition hover:border-cyan-300/50"
+                                        className="rounded-3xl border border-border bg-surface/80 p-5 transition hover:border-primary/30 hover:bg-secondary/70"
                                     >
-                                        <p className="text-xs uppercase tracking-[0.22em] text-slate-400">
+                                        <p className="text-xs uppercase tracking-[0.22em] text-muted">
                                             {formatDate(item.event_date)}
                                         </p>
-                                        <p className="mt-3 text-lg font-semibold text-white line-clamp-2">
+                                        <p className="mt-3 text-lg font-semibold text-text line-clamp-2">
                                             {item.title}
                                         </p>
-                                        <p className="mt-3 text-sm text-slate-300 line-clamp-3 [overflow-wrap:anywhere]">
+                                        <p className="mt-3 text-sm text-muted line-clamp-3 [overflow-wrap:anywhere]">
                                             {item.description}
                                         </p>
                                     </Link>
                                 ))
                             ) : (
-                                <div className="rounded-3xl border border-dashed border-white/10 bg-white/5 p-6 text-sm text-slate-400 md:col-span-3">
-                                    Belum ada event terkait.
+                                <div className="rounded-3xl border border-dashed border-border bg-surface/80 p-6 text-sm text-muted md:col-span-3">
+                                    Belum ada acara terkait.
                                 </div>
                             )}
                         </div>

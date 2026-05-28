@@ -37,18 +37,21 @@ export default function Create() {
 
             <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-                    <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                    <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                         <div className="flex items-center justify-between gap-4">
                             <div>
-                                <h3 className="text-lg font-semibold text-stone-900">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                    Produk Baru
+                                </p>
+                                <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                     Form Produk Baru
                                 </h3>
-                                <p className="mt-1 text-sm text-stone-500">
+                                <p className="mt-2 text-sm leading-6 text-muted">
                                     Tambahkan produk yang akan ditampilkan di
                                     website publik.
                                 </p>
                             </div>
-                            <Badge variant="muted">Create</Badge>
+                            <Badge variant="muted">Draft</Badge>
                         </div>
 
                         <form
@@ -56,7 +59,7 @@ export default function Create() {
                             className="mt-6 space-y-5"
                         >
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Nama Produk
                                 </span>
                                 <input
@@ -65,7 +68,7 @@ export default function Create() {
                                     onChange={(e) =>
                                         setData("name", e.target.value)
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                 />
                                 {errors.name && (
                                     <p className="text-xs text-rose-600">
@@ -75,7 +78,7 @@ export default function Create() {
                             </label>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Ringkasan
                                 </span>
                                 <input
@@ -87,7 +90,7 @@ export default function Create() {
                                             e.target.value,
                                         )
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                 />
                                 {errors.short_description && (
                                     <p className="text-xs text-rose-600">
@@ -97,7 +100,7 @@ export default function Create() {
                             </label>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Deskripsi Lengkap
                                 </span>
                                 <textarea
@@ -109,7 +112,7 @@ export default function Create() {
                                         )
                                     }
                                     rows={6}
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm leading-7 text-stone-900 outline-none transition focus:border-stone-400"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm leading-7 text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                 />
                                 {errors.full_description && (
                                     <p className="text-xs text-rose-600">
@@ -120,7 +123,7 @@ export default function Create() {
 
                             <div className="grid gap-5 sm:grid-cols-2">
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Ikon / Kategori
                                     </span>
                                     <input
@@ -129,12 +132,12 @@ export default function Create() {
                                         onChange={(e) =>
                                             setData("icon", e.target.value)
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                     />
                                 </label>
 
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Urutan
                                     </span>
                                     <input
@@ -144,7 +147,7 @@ export default function Create() {
                                         onChange={(e) =>
                                             setData("order", e.target.value)
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                     />
                                 </label>
                             </div>
@@ -160,16 +163,16 @@ export default function Create() {
                                                 e.target.checked,
                                             )
                                         }
-                                        className="h-4 w-4 rounded border-stone-200 text-stone-900"
+                                        className="h-4 w-4 rounded border-border text-primary"
                                     />
-                                    <span className="text-sm text-stone-700">
+                                    <span className="text-sm text-text">
                                         Featured
                                     </span>
                                 </label>
                             </div>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Thumbnail
                                 </span>
                                 <input
@@ -181,7 +184,7 @@ export default function Create() {
                                             e.target.files?.[0] ?? null,
                                         )
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-700 file:mr-4 file:rounded-xl file:border-0 file:bg-stone-900 file:px-4 file:py-2 file:text-sm file:font-medium file:text-stone-50"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-muted file:mr-4 file:rounded-xl file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
                                 />
                                 {errors.thumbnail && (
                                     <p className="text-xs text-rose-600">
@@ -194,13 +197,13 @@ export default function Create() {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-50 transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
+                                    className="rounded-2xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                                 >
                                     Simpan Produk
                                 </button>
                                 <Link
                                     href={route("admin.products.index")}
-                                    className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                    className="rounded-2xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                 >
                                     Batal
                                 </Link>
@@ -208,14 +211,14 @@ export default function Create() {
                         </form>
                     </Card>
 
-                    <Card className="overflow-hidden border-stone-200 bg-[#0F172A] p-6 text-stone-100 shadow-sm">
-                        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
+                    <Card className="overflow-hidden border-border/80 bg-surface/90 p-6 text-text shadow-sm shadow-ink/5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Preview
                         </p>
-                        <h4 className="mt-3 text-3xl font-semibold text-white [overflow-wrap:anywhere]">
+                        <h4 className="mt-3 text-3xl font-bold tracking-tight text-text [overflow-wrap:anywhere]">
                             {data.name || "Nama produk akan tampil di sini"}
                         </h4>
-                        <p className="mt-4 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-8 text-stone-300">
+                        <p className="mt-4 whitespace-pre-wrap [overflow-wrap:anywhere] text-sm leading-8 text-muted">
                             {data.short_description ||
                                 "Ringkasan produk akan muncul di sini."}
                         </p>

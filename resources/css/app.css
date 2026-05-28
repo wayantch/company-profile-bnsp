@@ -1,35 +1,86 @@
-@import url('https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=DM+Sans:wght@300;400;500;600&display=swap");
 
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
 :root {
-    --bg-base: #0A0F1E;
-    --bg-surface: #111827;
-    --color-primary: #0EA5E9;
-    --color-accent: #22D3EE;
-    --text-primary: #F1F5F9;
-    --text-muted: #94A3B8;
-    --border: #1E293B;
+    --color-primary-rgb: 122 143 107;
+    --color-primary-600-rgb: 107 123 88;
+    --color-primary-700-rgb: 86 99 72;
+    --color-secondary-rgb: 250 248 244;
+    --color-accent-rgb: 159 151 125;
+    --color-accent-2-rgb: 176 168 144;
+    --color-base-rgb: 252 251 248;
+    --color-surface-rgb: 255 255 255;
+    --color-border-rgb: 230 233 238;
+    --color-muted-rgb: 104 112 126;
+    --color-text-rgb: 39 45 58;
+    --color-ink-rgb: 10 15 30;
+}
+
+@theme {
+    --font-sans:
+        "DM Sans", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+        "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+    --font-mono: "Space Mono", monospace;
+}
+
+html {
+    color-scheme: light;
+    scroll-behavior: smooth;
 }
 
 body {
-    background-color: var(--bg-base);
-    color: var(--text-primary);
-    font-family: 'DM Sans', sans-serif;
+    min-height: 100vh;
+    background:
+        radial-gradient(
+            circle at top left,
+            rgb(var(--color-primary-rgb) / 0.09),
+            transparent 28%
+        ),
+        radial-gradient(
+            circle at top right,
+            rgb(var(--color-accent-rgb) / 0.08),
+            transparent 24%
+        ),
+        linear-gradient(
+            180deg,
+            rgb(var(--color-base-rgb)) 0%,
+            rgb(var(--color-secondary-rgb) / 0.72) 100%
+        );
+    color: rgb(var(--color-text-rgb));
+    font-family: "DM Sans", sans-serif;
 }
 
-/* Custom styles for modern cyber particles & glowing features */
+::selection {
+    background: rgb(var(--color-primary-rgb) / 0.22);
+    color: rgb(var(--color-ink-rgb));
+}
+
+/* Subtle texture for modern clean surfaces */
 .cyber-bg {
-    background-image: radial-gradient(circle at 50% 50%, rgba(14, 165, 233, 0.15) 1px, transparent 1px);
+    background-image: radial-gradient(
+        circle at 50% 50%,
+        rgb(var(--color-primary-rgb) / 0.1) 1px,
+        transparent 1px
+    );
     background-size: 24px 24px;
 }
 
 @keyframes floatParticles {
-    0% { transform: translateY(0) translateX(0); opacity: 0.2; }
-    50% { transform: translateY(-15px) translateX(10px); opacity: 0.6; }
-    100% { transform: translateY(-30px) translateX(0); opacity: 0.2; }
+    0% {
+        transform: translateY(0) translateX(0);
+        opacity: 0.2;
+    }
+    50% {
+        transform: translateY(-15px) translateX(10px);
+        opacity: 0.6;
+    }
+    100% {
+        transform: translateY(-30px) translateX(0);
+        opacity: 0.2;
+    }
 }
 
 .particle-item {
@@ -42,12 +93,12 @@ body {
     height: 6px;
 }
 ::-webkit-scrollbar-track {
-    background: #0A0F1E;
+    background: rgb(var(--color-secondary-rgb));
 }
 ::-webkit-scrollbar-thumb {
-    background: #1E293B;
+    background: rgb(var(--color-primary-rgb) / 0.28);
     border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-    background: #0EA5E9;
+    background: rgb(var(--color-primary-rgb) / 0.5);
 }

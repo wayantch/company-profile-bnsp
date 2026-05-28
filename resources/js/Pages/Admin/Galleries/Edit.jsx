@@ -37,17 +37,20 @@ export default function Edit({ gallery }) {
 
             <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-                    <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                    <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                         <div className="flex items-center justify-between gap-4">
                             <div>
-                                <h3 className="text-lg font-semibold text-stone-900">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                    Galeri
+                                </p>
+                                <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                     Form Edit Gallery
                                 </h3>
-                                <p className="mt-1 text-sm text-stone-500">
+                                <p className="mt-2 text-sm leading-6 text-muted">
                                     ID {gallery.id}
                                 </p>
                             </div>
-                            <Badge variant="muted">Edit</Badge>
+                            <Badge variant="muted">Ubah</Badge>
                         </div>
 
                         <form
@@ -55,7 +58,7 @@ export default function Edit({ gallery }) {
                             className="mt-6 space-y-5"
                         >
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Judul
                                 </span>
                                 <input
@@ -64,7 +67,7 @@ export default function Edit({ gallery }) {
                                     onChange={(event) =>
                                         setData("title", event.target.value)
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                 />
                                 {errors.title && (
                                     <p className="text-xs text-rose-600">
@@ -75,7 +78,7 @@ export default function Edit({ gallery }) {
 
                             <div className="grid gap-5 sm:grid-cols-2">
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Kategori
                                     </span>
                                     <input
@@ -87,7 +90,7 @@ export default function Edit({ gallery }) {
                                                 event.target.value,
                                             )
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                     />
                                     {errors.category && (
                                         <p className="text-xs text-rose-600">
@@ -97,7 +100,7 @@ export default function Edit({ gallery }) {
                                 </label>
 
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Urutan
                                     </span>
                                     <input
@@ -107,7 +110,7 @@ export default function Edit({ gallery }) {
                                         onChange={(event) =>
                                             setData("order", event.target.value)
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/60 focus:border-primary/30 focus:bg-white"
                                     />
                                     {errors.order && (
                                         <p className="text-xs text-rose-600">
@@ -118,7 +121,7 @@ export default function Edit({ gallery }) {
                             </div>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Ganti Gambar
                                 </span>
                                 <input
@@ -130,14 +133,14 @@ export default function Edit({ gallery }) {
                                             event.target.files?.[0] ?? null,
                                         )
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-700 file:mr-4 file:rounded-xl file:border-0 file:bg-stone-900 file:px-4 file:py-2 file:text-sm file:font-medium file:text-stone-50"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-muted file:mr-4 file:rounded-xl file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
                                 />
                                 {gallery.image_path && (
                                     <a
                                         href={gallery.image_path}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="block text-xs font-medium text-stone-900 underline decoration-stone-300 underline-offset-4"
+                                        className="block text-xs font-semibold text-text underline decoration-border underline-offset-4"
                                     >
                                         Gambar saat ini
                                     </a>
@@ -153,13 +156,13 @@ export default function Edit({ gallery }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-50 transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
+                                    className="rounded-2xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                                 >
                                     Simpan Perubahan
                                 </button>
                                 <Link
                                     href={route("admin.galleries.index")}
-                                    className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                    className="rounded-2xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                 >
                                     Kembali
                                 </Link>
@@ -167,14 +170,14 @@ export default function Edit({ gallery }) {
                         </form>
                     </Card>
 
-                    <Card className="overflow-hidden border-stone-200 bg-[#0F172A] p-6 text-stone-100 shadow-sm">
-                        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
+                    <Card className="overflow-hidden border-border/80 bg-surface/90 p-6 text-text shadow-sm shadow-ink/5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Preview
                         </p>
-                        <h4 className="mt-3 text-3xl font-semibold text-white [overflow-wrap:anywhere]">
+                        <h4 className="mt-3 text-3xl font-bold tracking-tight text-text [overflow-wrap:anywhere]">
                             {data.title || gallery.title}
                         </h4>
-                        <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.22em] text-stone-300">
+                        <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.22em] text-muted">
                             <span>
                                 {data.category || gallery.category || "Umum"}
                             </span>

@@ -16,10 +16,20 @@ export default {
                 54: "21rem",
             },
             colors: {
-                primary: "#0EA5E9",
-                accent: "#22D3EE",
-                surface: "#111827",
-                base: "#0A0F1E",
+                primary: "rgb(var(--color-primary-rgb) / <alpha-value>)",
+                "primary-600":
+                    "rgb(var(--color-primary-600-rgb) / <alpha-value>)",
+                "primary-700":
+                    "rgb(var(--color-primary-700-rgb) / <alpha-value>)",
+                secondary: "rgb(var(--color-secondary-rgb) / <alpha-value>)",
+                accent: "rgb(var(--color-accent-rgb) / <alpha-value>)",
+                "accent-2": "rgb(var(--color-accent-2-rgb) / <alpha-value>)",
+                surface: "rgb(var(--color-surface-rgb) / <alpha-value>)",
+                base: "rgb(var(--color-base-rgb) / <alpha-value>)",
+                border: "rgb(var(--color-border-rgb) / <alpha-value>)",
+                muted: "rgb(var(--color-muted-rgb) / <alpha-value>)",
+                text: "rgb(var(--color-text-rgb) / <alpha-value>)",
+                ink: "rgb(var(--color-ink-rgb) / <alpha-value>)",
             },
             fontFamily: {
                 sans: ['"DM Sans"', ...defaultTheme.fontFamily.sans],

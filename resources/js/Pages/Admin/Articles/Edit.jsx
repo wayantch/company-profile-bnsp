@@ -37,15 +37,18 @@ export default function Edit({ article }) {
                 ]}
             />
 
-            <div className=" px-4 pb-12 sm:px-6 lg:px-8">
+            <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8 lg:grid-cols-[1.15fr_0.85fr]">
-                    <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                    <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                         <div className="flex items-center justify-between gap-4">
                             <div>
-                                <h3 className="text-lg font-semibold text-stone-900">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                    Artikel
+                                </p>
+                                <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                     Form Edit Artikel
                                 </h3>
-                                <p className="mt-1 text-sm text-stone-500">
+                                <p className="mt-2 text-sm leading-6 text-muted">
                                     ID {article.id} · {article.slug}
                                 </p>
                             </div>
@@ -54,7 +57,7 @@ export default function Edit({ article }) {
                                     article.is_published ? "primary" : "muted"
                                 }
                             >
-                                {article.is_published ? "Published" : "Draft"}
+                                {article.is_published ? "Terbit" : "Draf"}
                             </Badge>
                         </div>
 
@@ -64,7 +67,7 @@ export default function Edit({ article }) {
                         >
                             <div className="grid gap-5 sm:grid-cols-2">
                                 <label className="space-y-2 block sm:col-span-2">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Judul
                                     </span>
                                     <input
@@ -73,7 +76,7 @@ export default function Edit({ article }) {
                                         onChange={(event) =>
                                             setData("title", event.target.value)
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/70 focus:border-primary/30 focus:bg-white"
                                     />
                                     {errors.title && (
                                         <p className="text-xs text-rose-600">
@@ -83,7 +86,7 @@ export default function Edit({ article }) {
                                 </label>
 
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Kategori
                                     </span>
                                     <input
@@ -95,7 +98,7 @@ export default function Edit({ article }) {
                                                 event.target.value,
                                             )
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/70 focus:border-primary/30 focus:bg-white"
                                     />
                                     {errors.category && (
                                         <p className="text-xs text-rose-600">
@@ -105,7 +108,7 @@ export default function Edit({ article }) {
                                 </label>
 
                                 <label className="space-y-2 block">
-                                    <span className="block text-sm font-medium text-stone-700">
+                                    <span className="block text-sm font-medium text-text">
                                         Penulis
                                     </span>
                                     <input
@@ -117,7 +120,7 @@ export default function Edit({ article }) {
                                                 event.target.value,
                                             )
                                         }
-                                        className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-900 outline-none transition focus:border-stone-400"
+                                        className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/70 focus:border-primary/30 focus:bg-white"
                                     />
                                     {errors.author && (
                                         <p className="text-xs text-rose-600">
@@ -128,7 +131,7 @@ export default function Edit({ article }) {
                             </div>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Konten
                                 </span>
                                 <textarea
@@ -137,7 +140,7 @@ export default function Edit({ article }) {
                                         setData("content", event.target.value)
                                     }
                                     rows={10}
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm leading-7 text-stone-900 outline-none transition focus:border-stone-400"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm leading-7 text-text outline-none transition placeholder:text-muted/70 focus:border-primary/30 focus:bg-white"
                                 />
                                 {errors.content && (
                                     <p className="text-xs text-rose-600">
@@ -147,7 +150,7 @@ export default function Edit({ article }) {
                             </label>
 
                             <label className="space-y-2 block">
-                                <span className="block text-sm font-medium text-stone-700">
+                                <span className="block text-sm font-medium text-text">
                                     Thumbnail baru
                                 </span>
                                 <input
@@ -159,14 +162,14 @@ export default function Edit({ article }) {
                                             event.target.files?.[0] ?? null,
                                         )
                                     }
-                                    className="w-full rounded-2xl border border-stone-200 bg-white px-4 py-3 text-sm text-stone-700 file:mr-4 file:rounded-xl file:border-0 file:bg-stone-900 file:px-4 file:py-2 file:text-sm file:font-medium file:text-stone-50"
+                                    className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-muted file:mr-4 file:rounded-xl file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
                                 />
                                 {article.thumbnail && (
                                     <a
                                         href={article.thumbnail}
                                         target="_blank"
                                         rel="noreferrer"
-                                        className="block text-xs font-medium text-stone-900 underline decoration-stone-300 underline-offset-4"
+                                        className="block text-xs font-semibold text-primary underline decoration-primary/30 underline-offset-4"
                                     >
                                         Thumbnail saat ini
                                     </a>
@@ -178,7 +181,7 @@ export default function Edit({ article }) {
                                 )}
                             </label>
 
-                            <label className="flex items-center gap-3 rounded-2xl border border-stone-200 bg-stone-50 px-4 py-3">
+                            <label className="flex items-center gap-3 rounded-2xl border border-border bg-secondary/40 px-4 py-3">
                                 <input
                                     type="checkbox"
                                     checked={data.is_published}
@@ -188,9 +191,9 @@ export default function Edit({ article }) {
                                             event.target.checked,
                                         )
                                     }
-                                    className="h-4 w-4 rounded border-stone-300 text-stone-900 focus:ring-stone-400"
+                                    className="h-4 w-4 rounded border-border text-primary focus:ring-primary/30"
                                 />
-                                <span className="text-sm text-stone-700">
+                                <span className="text-sm text-text">
                                     Publikasikan artikel ini
                                 </span>
                             </label>
@@ -199,13 +202,13 @@ export default function Edit({ article }) {
                                 <button
                                     type="submit"
                                     disabled={processing}
-                                    className="rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-50 transition hover:bg-stone-800 disabled:cursor-not-allowed disabled:opacity-60"
+                                    className="rounded-2xl bg-gradient-to-r from-primary to-accent px-5 py-2.5 text-sm font-semibold text-white transition hover:opacity-90 disabled:cursor-not-allowed disabled:opacity-60"
                                 >
                                     Simpan Perubahan
                                 </button>
                                 <Link
                                     href={route("admin.articles.index")}
-                                    className="rounded-2xl border border-stone-200 px-4 py-2.5 text-sm font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                    className="rounded-2xl border border-border bg-surface px-5 py-2.5 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                 >
                                     Kembali
                                 </Link>
@@ -213,25 +216,25 @@ export default function Edit({ article }) {
                         </form>
                     </Card>
 
-                    <Card className="overflow-hidden border-stone-200 bg-[#0F172A] p-6 text-stone-100 shadow-sm">
-                        <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
+                    <Card className="overflow-hidden border-border/80 bg-surface/90 p-6 text-text shadow-sm shadow-ink/5">
+                        <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Preview
                         </p>
-                        <h4 className="mt-3 text-3xl font-semibold text-white">
+                        <h4 className="mt-3 text-3xl font-bold tracking-tight text-text">
                             {data.title || article.title}
                         </h4>
-                        <div className="mt-4 flex flex-wrap gap-3 text-xs uppercase tracking-[0.22em] text-stone-300">
+                        <div className="mt-4 flex flex-wrap gap-3 text-xs font-semibold uppercase tracking-[0.22em] text-muted">
                             <span>{data.category || article.category}</span>
                             <span>
                                 {data.author || article.author || "Admin"}
                             </span>
                         </div>
 
-                        <div className="mt-6 rounded-3xl border border-white/10 bg-white/5 p-5">
-                            <p className="text-xs uppercase tracking-[0.25em] text-cyan-200">
+                        <div className="mt-6 rounded-3xl border border-border bg-base/80 p-5">
+                            <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
                                 Konten
                             </p>
-                            <p className="mt-4 whitespace-pre-wrap text-sm leading-8 text-stone-300">
+                            <p className="mt-4 whitespace-pre-wrap text-sm leading-8 text-text/80">
                                 {data.content || article.content}
                             </p>
                         </div>
@@ -240,7 +243,7 @@ export default function Edit({ article }) {
                             <img
                                 src={article.thumbnail}
                                 alt={article.title}
-                                className="mt-6 h-56 w-full rounded-3xl object-cover"
+                                className="mt-6 h-56 w-full rounded-3xl object-cover shadow-sm shadow-ink/5"
                             />
                         )}
                     </Card>

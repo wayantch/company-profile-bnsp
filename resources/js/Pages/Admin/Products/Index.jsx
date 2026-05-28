@@ -26,48 +26,51 @@ export default function Index({ products = [] }) {
             />
 
             <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
-                <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                     <div className="flex items-center justify-between gap-4">
                         <div>
-                            <h3 className="text-lg font-semibold text-stone-900">
+                            <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                Produk & Layanan
+                            </p>
+                            <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                 Semua Produk
                             </h3>
-                            <p className="mt-1 text-sm text-stone-500">
+                            <p className="mt-2 text-sm leading-6 text-muted">
                                 Total produk: {products.length}
                             </p>
                         </div>
-                        <Badge variant="muted">Index Page</Badge>
+                        <Badge variant="muted">Daftar</Badge>
                     </div>
 
-                    <div className="mt-6 overflow-hidden rounded-2xl border border-stone-200">
-                        <table className="min-w-full divide-y divide-stone-200 text-sm">
-                            <thead className="bg-stone-50 text-stone-500">
+                    <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-base/80">
+                        <table className="min-w-full divide-y divide-border text-sm">
+                            <thead className="bg-secondary/50 text-muted">
                                 <tr>
-                                    <th className="px-4 py-3 text-left font-medium">
+                                    <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
                                         Nama
                                     </th>
-                                    <th className="px-4 py-3 text-left font-medium">
+                                    <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
                                         Ringkasan
                                     </th>
-                                    <th className="px-4 py-3 text-left font-medium">
+                                    <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
                                         Featured
                                     </th>
-                                    <th className="px-4 py-3 text-left font-medium">
+                                    <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
                                         Aksi
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody className="divide-y divide-stone-100 bg-white">
+                            <tbody className="divide-y divide-border bg-base/80">
                                 {products.length ? (
                                     products.map((product) => (
                                         <tr
                                             key={product.id}
-                                            className="hover:bg-stone-50/80"
+                                            className="hover:bg-secondary/40"
                                         >
-                                            <td className="px-4 py-3 font-medium text-stone-900">
+                                            <td className="px-4 py-3 font-medium text-text">
                                                 {product.name}
                                             </td>
-                                            <td className="px-4 py-3 text-stone-600">
+                                            <td className="px-4 py-3 text-muted">
                                                 {product.short_description}
                                             </td>
                                             <td className="px-4 py-3">
@@ -79,8 +82,8 @@ export default function Index({ products = [] }) {
                                                     }
                                                 >
                                                     {product.is_featured
-                                                        ? "Yes"
-                                                        : "No"}
+                                                        ? "Ya"
+                                                        : "Tidak"}
                                                 </Badge>
                                             </td>
 
@@ -91,7 +94,7 @@ export default function Index({ products = [] }) {
                                                             "admin.products.show",
                                                             product.id,
                                                         )}
-                                                        className="rounded-xl border border-stone-200 px-3 py-2 text-xs font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                                        className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                                     >
                                                         Lihat
                                                     </Link>
@@ -100,7 +103,7 @@ export default function Index({ products = [] }) {
                                                             "admin.products.edit",
                                                             product.id,
                                                         )}
-                                                        className="rounded-xl border border-stone-200 px-3 py-2 text-xs font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                                        className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                                     >
                                                         Edit
                                                     </Link>
@@ -111,7 +114,7 @@ export default function Index({ products = [] }) {
                                                                 product.id,
                                                             )
                                                         }
-                                                        className="rounded-xl border border-rose-200 px-3 py-2 text-xs font-medium text-rose-600 transition hover:border-rose-300 hover:bg-rose-50"
+                                                        className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-300 hover:bg-rose-100"
                                                     >
                                                         Hapus
                                                     </button>
@@ -122,7 +125,7 @@ export default function Index({ products = [] }) {
                                 ) : (
                                     <tr>
                                         <td
-                                            className="px-4 py-10 text-center text-stone-500"
+                                            className="px-4 py-10 text-center text-muted"
                                             colSpan={3}
                                         >
                                             Belum ada produk.

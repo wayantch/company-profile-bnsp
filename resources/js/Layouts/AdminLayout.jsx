@@ -24,16 +24,16 @@ function AdminNavItem({ href, active, children, icon }) {
             href={href}
             className={`group flex items-center justify-between rounded-2xl px-3 py-2.5 text-sm font-medium transition duration-200 ${
                 active
-                    ? "bg-stone-100 text-stone-900 shadow-sm"
-                    : "text-stone-600 hover:bg-stone-100 hover:text-stone-900"
+                    ? "border border-primary/20 bg-primary/10 text-text shadow-sm"
+                    : "text-muted hover:bg-secondary/70 hover:text-text"
             }`}
         >
             <span className="flex items-center gap-3">
                 <span
                     className={`flex h-9 w-9 items-center justify-center rounded-xl transition duration-200 ${
                         active
-                            ? "bg-stone-900 text-stone-50"
-                            : "bg-stone-200 text-stone-600 group-hover:bg-stone-900 group-hover:text-stone-50"
+                            ? "bg-gradient-to-br from-primary/20 to-accent/20 text-primary"
+                            : "bg-secondary text-muted group-hover:bg-primary/10 group-hover:text-primary"
                     }`}
                 >
                     {icon}
@@ -42,7 +42,7 @@ function AdminNavItem({ href, active, children, icon }) {
             </span>
 
             <ChevronRight
-                className={`h-4 w-4 transition duration-200 ${active ? "text-stone-400" : "text-stone-400 group-hover:text-stone-700"}`}
+                className={`h-4 w-4 transition duration-200 ${active ? "text-muted" : "text-muted group-hover:text-text"}`}
             />
         </Link>
     );
@@ -55,7 +55,7 @@ export default function AdminLayout({ children }) {
 
     const navItems = [
         {
-            label: "Dashboard",
+            label: "Dasboard",
             href: route("dashboard"),
             match: ["/admin", "/admin/"],
             icon: <LayoutDashboard className="h-4 w-4" />,
@@ -73,7 +73,7 @@ export default function AdminLayout({ children }) {
             icon: <CalendarDays className="h-4 w-4" />,
         },
         {
-            label: "Gallery",
+            label: "Galeri",
             href: route("admin.galleries.index"),
             match: "/admin/galleries",
             icon: <Image className="h-4 w-4" />,
@@ -113,16 +113,22 @@ export default function AdminLayout({ children }) {
     };
 
     return (
-        <div className="min-h-screen bg-[#F7F4EE] text-stone-900">
+        <div className="min-h-screen bg-base text-text">
+            <div className="pointer-events-none fixed inset-0 -z-10 overflow-hidden">
+                <div className="absolute left-[-6rem] top-[-6rem] h-72 w-72 rounded-full bg-primary/10 blur-3xl" />
+                <div className="absolute right-[-4rem] top-28 h-80 w-80 rounded-full bg-accent/10 blur-3xl" />
+                <div className="absolute bottom-[-6rem] left-1/3 h-80 w-80 rounded-full bg-secondary/70 blur-3xl" />
+            </div>
+
             {sidebarOpen && (
                 <div
-                    className="fixed inset-0 z-30 bg-stone-900/30 backdrop-blur-sm lg:hidden"
+                    className="fixed inset-0 z-30 bg-text/10 backdrop-blur-sm lg:hidden"
                     onClick={() => setSidebarOpen(false)}
                 />
             )}
 
             <aside
-                className={`fixed inset-y-0 left-0 z-40 w-54 border-r border-stone-200 bg-[#FAF7F1] text-stone-900 shadow-[0_10px_30px_rgba(15,23,42,0.06)] transition-transform duration-300 lg:translate-x-0 ${
+                className={`fixed inset-y-0 left-0 z-40 w-64 border-r border-border/80 bg-surface/95 text-text shadow-[0_10px_30px_rgba(10,15,30,0.06)] backdrop-blur-xl transition-transform duration-300 lg:translate-x-0 ${
                     sidebarOpen ? "translate-x-0" : "-translate-x-full"
                 }`}
             >
@@ -132,15 +138,15 @@ export default function AdminLayout({ children }) {
                             href={route("dashboard")}
                             className="flex items-center gap-3"
                         >
-                            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-stone-900 text-stone-50 shadow-sm">
-                                <ApplicationLogo className="h-6 w-6 fill-current text-stone-50" />
+                            <span className="flex h-11 w-11 items-center justify-center rounded-2xl bg-gradient-to-br from-primary/20 to-accent/20 text-primary shadow-sm shadow-primary/5">
+                                <ApplicationLogo className="h-6 w-6 fill-current text-white" />
                             </span>
                             <div>
-                                <p className="text-xs font-medium uppercase tracking-[0.25em] text-stone-500">
+                                <p className="text-xs font-medium uppercase tracking-[0.25em] text-muted">
                                     Admin
                                 </p>
-                                <p className="text-base font-semibold text-stone-900">
-                                    Company Profile
+                                <p className="text-base font-semibold text-text">
+                                    Profil Perusahaan
                                 </p>
                             </div>
                         </Link>
@@ -148,7 +154,7 @@ export default function AdminLayout({ children }) {
                         <button
                             type="button"
                             onClick={() => setSidebarOpen(false)}
-                            className="rounded-xl p-2 text-stone-500 hover:bg-stone-100 hover:text-stone-900 lg:hidden"
+                            className="rounded-xl p-2 text-muted hover:bg-secondary/70 hover:text-text lg:hidden"
                         >
                             <X className="h-5 w-5" />
                         </button>
@@ -167,47 +173,45 @@ export default function AdminLayout({ children }) {
                         ))}
                     </div>
 
-                    <div className="mt-auto space-y-4 border-t border-stone-200 pt-5">
-                        <div className="rounded-2xl bg-white p-4 shadow-sm border border-stone-200">
-                            <p className="text-xs uppercase tracking-[0.22em] text-stone-500">
-                                Signed in as
+                    <div className="mt-auto space-y-4 border-t border-border/80 pt-5">
+                        <div className="rounded-3xl border border-border bg-base/90 p-4 shadow-sm shadow-ink/5">
+                            <p className="text-xs uppercase tracking-[0.22em] text-muted">
+                                Masuk sebagai
                             </p>
-                            <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-stone-900">
-                                <UserRound className="h-4 w-4 text-stone-500" />
+                            <p className="mt-2 flex items-center gap-2 text-sm font-semibold text-text">
+                                <UserRound className="h-4 w-4 text-muted" />
                                 {user.name}
                             </p>
-                            <p className="text-xs text-stone-500">
-                                {user.email}
-                            </p>
+                            <p className="text-xs text-muted">{user.email}</p>
                         </div>
 
                         <div className="grid grid-cols-2 gap-2 text-sm">
                             <Link
                                 href={route("profile.edit")}
-                                className="rounded-2xl border border-stone-200 px-3 py-2 text-center text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
+                                className="rounded-2xl border border-border bg-surface/80 px-3 py-2 text-center text-text transition hover:border-primary/30 hover:bg-secondary/70"
                             >
-                                Profile
+                                Profil
                             </Link>
                             <Link
                                 href={route("logout")}
                                 method="post"
                                 as="button"
-                                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-stone-900 px-3 py-2 text-center font-medium text-stone-50 transition hover:bg-stone-800"
+                                className="inline-flex items-center justify-center gap-2 rounded-2xl bg-gradient-to-r from-primary to-accent px-3 py-2 text-center font-medium text-white transition hover:opacity-90"
                             >
                                 <LogOut className="h-4 w-4" />
-                                Logout
+                                Keluar
                             </Link>
                         </div>
                     </div>
                 </div>
             </aside>
 
-            <div className="lg:pl-54">
-                <div className="sticky top-0 z-20 border-b border-stone-200/80 bg-[#F7F4EE]/90 px-4 py-4 backdrop-blur lg:hidden">
+            <div className="lg:pl-64">
+                <div className="sticky top-0 z-20 border-b border-border/80 bg-base/90 px-4 py-4 backdrop-blur-xl lg:hidden">
                     <button
                         type="button"
                         onClick={() => setSidebarOpen(true)}
-                        className="inline-flex items-center gap-2 rounded-2xl border border-stone-200 bg-white px-4 py-2 text-sm font-medium text-stone-700 shadow-sm"
+                        className="inline-flex items-center gap-2 rounded-2xl border border-border bg-surface/90 px-4 py-2 text-sm font-medium text-text shadow-sm shadow-ink/5"
                     >
                         <Menu className="h-5 w-5" />
                         Menu

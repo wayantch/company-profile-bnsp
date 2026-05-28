@@ -190,7 +190,7 @@ export default function Edit({ client }) {
                         </form>
                     </Card>
 
-                    <Card className="overflow-hidden border-stone-200 bg-[#0F172A] p-6 text-stone-100 shadow-sm">
+                    <Card className="overflow-hidden border-border bg-surface p-6 text-text shadow-sm">
                         <p className="text-xs uppercase tracking-[0.28em] text-cyan-200">
                             Preview
                         </p>

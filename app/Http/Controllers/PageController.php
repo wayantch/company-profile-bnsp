@@ -17,8 +17,13 @@ class PageController extends Controller
             ->get()
             ->pluck('value', 'key');
 
+        $visiMisi = PageContent::where('section', 'visi_misi')
+            ->get()
+            ->pluck('value', 'key');
+
         return Inertia::render('Public/About', [
-            'about' => $about
+            'about' => $about,
+            'visiMisi' => $visiMisi,
         ]);
     }
 
