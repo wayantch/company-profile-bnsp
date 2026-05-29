@@ -50,78 +50,115 @@ export default function Index({ galleries = [] }) {
                             </Link>
                         </div>
 
-                        <div className="mt-6 grid gap-4 md:grid-cols-3">
-                            {galleries.length ? (
-                                galleries.map((gallery) => (
-                                    <article
-                                        key={gallery.id}
-                                        className="overflow-hidden rounded-3xl border border-border bg-base/80 transition hover:-translate-y-0.5 hover:border-primary/20 hover:bg-white"
-                                    >
-                                        <div className="aspect-[4/3] bg-secondary/60">
-                                            {gallery.image_path ? (
-                                                <img
-                                                    src={gallery.image_path}
-                                                    alt={gallery.title}
-                                                    className="h-full w-full object-cover"
-                                                />
-                                            ) : (
-                                                <div className="flex h-full items-center justify-center bg-gradient-to-br from-secondary/80 to-base text-xs uppercase tracking-[0.24em] text-muted">
-                                                    No Image
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="p-5">
-                                            <div className="flex items-center justify-between gap-3">
-                                                <Badge variant="accent">
+                        <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-base/80">
+                            <table className="min-w-full divide-y divide-border text-sm">
+                                <thead className="bg-secondary/50 text-muted">
+                                    <tr>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Gambar
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Judul
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Kategori
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Order
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-border bg-base/80">
+                                    {galleries.length ? (
+                                        galleries.map((gallery) => (
+                                            <tr
+                                                key={gallery.id}
+                                                className="hover:bg-secondary/40"
+                                            >
+                                                <td className="px-4 py-3">
+                                                    <Link
+                                                        href={route(
+                                                            "admin.galleries.show",
+                                                            gallery.id,
+                                                        )}
+                                                        className="block w-24"
+                                                    >
+                                                        {gallery.image_path ? (
+                                                            <img
+                                                                src={
+                                                                    gallery.image_path
+                                                                }
+                                                                alt={
+                                                                    gallery.title
+                                                                }
+                                                                className="h-12 w-24 rounded-md object-cover"
+                                                            />
+                                                        ) : (
+                                                            <div className="flex h-12 w-24 items-center justify-center rounded-md bg-secondary/40 text-xs text-muted">
+                                                                No Image
+                                                            </div>
+                                                        )}
+                                                    </Link>
+                                                </td>
+                                                <td className="px-4 py-3 font-medium text-text [overflow-wrap:anywhere]">
+                                                    {gallery.title}
+                                                </td>
+                                                <td className="px-4 py-3 text-muted">
                                                     {gallery.category || "Umum"}
-                                                </Badge>
-                                                <Badge variant="muted">
-                                                    Order {gallery.order ?? 0}
-                                                </Badge>
-                                            </div>
-
-                                            <h4 className="mt-4 line-clamp-2 text-xl font-semibold tracking-tight text-text [overflow-wrap:anywhere]">
-                                                {gallery.title}
-                                            </h4>
-
-                                            <div className="mt-5 flex flex-wrap gap-2">
-                                                <Link
-                                                    href={route(
-                                                        "admin.galleries.show",
-                                                        gallery.id,
-                                                    )}
-                                                    className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
-                                                >
-                                                    Lihat
-                                                </Link>
-                                                <Link
-                                                    href={route(
-                                                        "admin.galleries.edit",
-                                                        gallery.id,
-                                                    )}
-                                                    className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
-                                                >
-                                                    Edit
-                                                </Link>
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        handleDelete(gallery.id)
-                                                    }
-                                                    className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-300 hover:bg-rose-100"
-                                                >
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </article>
-                                ))
-                            ) : (
-                                <div className="rounded-3xl border border-dashed border-border bg-base/80 p-6 text-sm text-muted md:col-span-2 xl:col-span-3">
-                                    Belum ada foto gallery.
-                                </div>
-                            )}
+                                                </td>
+                                                <td className="px-4 py-3 text-muted">
+                                                    {gallery.order ?? 0}
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <div className="flex flex-wrap gap-2">
+                                                        <Link
+                                                            href={route(
+                                                                "admin.galleries.show",
+                                                                gallery.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Lihat
+                                                        </Link>
+                                                        <Link
+                                                            href={route(
+                                                                "admin.galleries.edit",
+                                                                gallery.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    gallery.id,
+                                                                )
+                                                            }
+                                                            className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-300 hover:bg-rose-100"
+                                                        >
+                                                            Hapus
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td
+                                                className="px-4 py-10 text-center text-muted"
+                                                colSpan={5}
+                                            >
+                                                Belum ada foto gallery.
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
                     </Card>
                 </div>

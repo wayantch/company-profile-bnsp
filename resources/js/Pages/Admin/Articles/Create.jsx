@@ -4,10 +4,10 @@ import Card from "@/Components/UI/Card";
 import Badge from "@/Components/UI/Badge";
 import { Head, Link, useForm } from "@inertiajs/react";
 
-export default function Create() {
+export default function Create({ categories = [] }) {
     const { data, setData, post, processing, errors } = useForm({
         title: "",
-        category: "",
+        category_id: "",
         content: "",
         author: "",
         is_published: false,
@@ -83,21 +83,26 @@ export default function Create() {
                                     <span className="block text-sm font-medium text-text">
                                         Kategori
                                     </span>
-                                    <input
-                                        type="text"
-                                        value={data.category}
+                                    <select
+                                        value={data.category_id}
                                         onChange={(event) =>
                                             setData(
-                                                "category",
+                                                "category_id",
                                                 event.target.value,
                                             )
                                         }
                                         className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-text outline-none transition placeholder:text-muted/70 focus:border-primary/30 focus:bg-white"
-                                        placeholder="Insight"
-                                    />
-                                    {errors.category && (
+                                    >
+                                        <option value="">Pilih kategori</option>
+                                        {categories.map((c) => (
+                                            <option key={c.id} value={c.id}>
+                                                {c.name}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    {errors.category_id && (
                                         <p className="text-xs text-rose-600">
-                                            {errors.category}
+                                            {errors.category_id}
                                         </p>
                                     )}
                                 </label>

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Inertia\Inertia;
@@ -12,7 +13,7 @@ class ArticleController extends Controller
 {
     public function index()
     {
-        $articles = Article::orderBy('created_at', 'desc')->get();
+        $articles = Article::with('category')->orderBy('created_at', 'desc')->get();
         return Inertia::render('Admin/Articles/Index', [
             'articles' => $articles
         ]);
@@ -20,28 +21,31 @@ class ArticleController extends Controller
 
     public function show(Article $article)
     {
-        $relatedArticles = Article::where('id', '!=', $article->id)
-            ->where('category', $article->category)
+        $relatedArticles = Article::with('category')->where('id', '!=', $article->id)
+            ->where('category_id', $article->category_id)
             ->orderBy('created_at', 'desc')
             ->take(3)
             ->get();
 
         return Inertia::render('Admin/Articles/Show', [
-            'article' => $article,
+            'article' => $article->load('category'),
             'relatedArticles' => $relatedArticles,
         ]);
     }
 
     public function create()
     {
-        return Inertia::render('Admin/Articles/Create');
+        $categories = Category::orderBy('order', 'asc')->get();
+        return Inertia::render('Admin/Articles/Create', [
+            'categories' => $categories,
+        ]);
     }
 
     public function store(Request $request)
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'content' => 'required|string',
             'author' => 'nullable|string|max:255',
             'is_published' => 'required|boolean',
@@ -57,6 +61,12 @@ class ArticleController extends Controller
             $validated['author'] = 'Admin';
         }
 
+        // keep readable category name for backward compatibility
+        $category = Category::find($validated['category_id']);
+        if ($category) {
+            $validated['category'] = $category->name;
+        }
+
         Article::create($validated);
 
         return redirect()->route('admin.articles.index')->with('success', 'Artikel berhasil ditambahkan.');
@@ -64,8 +74,10 @@ class ArticleController extends Controller
 
     public function edit(Article $article)
     {
+        $categories = Category::orderBy('order', 'asc')->get();
         return Inertia::render('Admin/Articles/Edit', [
-            'article' => $article
+            'article' => $article,
+            'categories' => $categories,
         ]);
     }
 
@@ -73,7 +85,7 @@ class ArticleController extends Controller
     {
         $validated = $request->validate([
             'title' => 'required|string|max:255',
-            'category' => 'required|string|max:255',
+            'category_id' => 'required|exists:categories,id',
             'content' => 'required|string',
             'author' => 'nullable|string|max:255',
             'is_published' => 'required|boolean',
@@ -98,6 +110,12 @@ class ArticleController extends Controller
 
         if (empty($validated['author'])) {
             $validated['author'] = 'Admin';
+        }
+
+        // keep readable category name for backward compatibility
+        $category = Category::find($validated['category_id']);
+        if ($category) {
+            $validated['category'] = $category->name;
         }
 
         $article->update($validated);

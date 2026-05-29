@@ -3,6 +3,7 @@ import PageHeader from "@/Components/Layout/PageHeader";
 import Card from "@/Components/UI/Card";
 import Badge from "@/Components/UI/Badge";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useState, useEffect } from "react";
 
 export default function Create() {
     const { data, setData, post, processing, errors } = useForm({
@@ -14,6 +15,14 @@ export default function Create() {
         order: 0,
         thumbnail: null,
     });
+
+    const [previewUrl, setPreviewUrl] = useState(null);
+
+    useEffect(() => {
+        return () => {
+            if (previewUrl) URL.revokeObjectURL(previewUrl);
+        };
+    }, [previewUrl]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -178,12 +187,18 @@ export default function Create() {
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    onChange={(e) =>
-                                        setData(
-                                            "thumbnail",
-                                            e.target.files?.[0] ?? null,
-                                        )
-                                    }
+                                    onChange={(e) => {
+                                        const file =
+                                            e.target.files?.[0] ?? null;
+                                        setData("thumbnail", file);
+                                        if (file) {
+                                            const url =
+                                                URL.createObjectURL(file);
+                                            setPreviewUrl(url);
+                                        } else {
+                                            setPreviewUrl(null);
+                                        }
+                                    }}
                                     className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-muted file:mr-4 file:rounded-xl file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
                                 />
                                 {errors.thumbnail && (
@@ -215,6 +230,16 @@ export default function Create() {
                         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Preview
                         </p>
+                        {previewUrl ? (
+                            <div className="rounded-xl overflow-hidden">
+                                <img
+                                    src={previewUrl}
+                                    alt={data.name || "preview"}
+                                    className="w-full h-40 object-cover rounded-xl"
+                                />
+                            </div>
+                        ) : null}
+
                         <h4 className="mt-3 text-3xl font-bold tracking-tight text-text [overflow-wrap:anywhere]">
                             {data.name || "Nama produk akan tampil di sini"}
                         </h4>

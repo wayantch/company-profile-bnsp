@@ -6,27 +6,33 @@ export default function Index({ articles, categories, currentCategory }) {
         <PublicLayout title="Artikel">
             <section className="bg-base">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
-                    <p className="text-xs uppercase tracking-[0.3em] text-primary">
+                    <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
                         Artikel
                     </p>
-                    <h1 className="mt-3 text-4xl font-semibold text-text sm:text-5xl">
+                    <h1 className="mt-3 text-4xl font-bold tracking-tight text-text sm:text-5xl">
                         Wawasan dan artikel terbaru
                     </h1>
+                    <p className="mt-4 max-w-2xl text-sm leading-7 text-muted">
+                        Pilih kategori untuk melihat artikel yang paling relevan
+                        dan temukan insight terbaru dari tim kami.
+                    </p>
 
-                    <div className="mt-8 flex flex-wrap gap-3">
+                    <div className="mt-8 flex flex-wrap gap-3 rounded-3xl border border-border bg-surface/90 p-3 shadow-sm shadow-ink/5 backdrop-blur-sm">
                         <Link
                             href={route("articles.index")}
-                            className={`rounded-full px-4 py-2 text-sm transition ${!currentCategory ? "bg-primary text-white" : "border border-border bg-surface text-text"}`}
+                            className={`rounded-full px-4 py-2 text-sm font-semibold transition ${!currentCategory ? "bg-gradient-to-r from-primary to-accent text-white shadow-sm shadow-primary/10" : "border border-border bg-base text-text hover:border-primary/25 hover:bg-secondary/70"}`}
                         >
                             Semua
                         </Link>
                         {(categories || []).map((category) => (
                             <Link
-                                key={category}
-                                href={route("articles.index", { category })}
-                                className={`rounded-full px-4 py-2 text-sm transition ${currentCategory === category ? "bg-primary text-white" : "border border-border bg-surface text-text"}`}
+                                key={category.id}
+                                href={route("articles.index", {
+                                    category: category.slug,
+                                })}
+                                className={`rounded-full px-4 py-2 text-sm font-semibold transition ${currentCategory === category.slug ? "bg-gradient-to-r from-primary to-accent text-white shadow-sm shadow-primary/10" : "border border-border bg-base text-text hover:border-primary/25 hover:bg-secondary/70"}`}
                             >
-                                {category}
+                                {category.name}
                             </Link>
                         ))}
                     </div>
@@ -35,12 +41,14 @@ export default function Index({ articles, categories, currentCategory }) {
                         {(articles?.data || []).map((article) => (
                             <article
                                 key={article.id}
-                                className="rounded-3xl border border-border bg-surface/80 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm"
+                                className="rounded-3xl border border-border bg-surface/90 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm transition hover:-translate-y-1 hover:border-primary/20 hover:shadow-lg hover:shadow-ink/5"
                             >
-                                <p className="text-xs uppercase tracking-[0.25em] text-muted">
-                                    {article.category}
+                                <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">
+                                    {article.category?.name ||
+                                        article.category ||
+                                        "Artikel"}
                                 </p>
-                                <h2 className="mt-4 text-2xl font-semibold text-text">
+                                <h2 className="mt-4 text-2xl font-bold tracking-tight text-text">
                                     {article.title}
                                 </h2>
                                 <p className="mt-4 line-clamp-5 text-sm leading-7 text-muted">
@@ -48,7 +56,7 @@ export default function Index({ articles, categories, currentCategory }) {
                                 </p>
                                 <Link
                                     href={route("articles.show", article.slug)}
-                                    className="mt-5 inline-block text-sm text-primary hover:text-primary-700"
+                                    className="mt-5 inline-flex items-center rounded-2xl border border-border bg-base px-4 py-2 text-sm font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
                                 >
                                     Baca selengkapnya
                                 </Link>
@@ -68,7 +76,7 @@ export default function Index({ articles, categories, currentCategory }) {
                                     key={index}
                                     href={link.url || ""}
                                     preserveScroll
-                                    className={`rounded-lg border px-4 py-2 text-sm transition ${link.active ? "border-primary bg-primary text-white" : "border-border bg-surface text-text"}`}
+                                    className={`rounded-full border px-4 py-2 text-sm font-semibold transition ${link.active ? "border-transparent bg-gradient-to-r from-primary to-accent text-white shadow-sm shadow-primary/10" : "border-border bg-base text-text hover:border-primary/25 hover:bg-secondary/70"}`}
                                     dangerouslySetInnerHTML={{
                                         __html: link.label,
                                     }}

@@ -96,12 +96,12 @@ export default function AdminLayout({ children }) {
             match: "/admin/contacts",
             icon: <Mail className="h-4 w-4" />,
         },
-        {
-            label: "Konten Halaman",
-            href: route("admin.page-contents.index"),
-            match: "/admin/page-contents",
-            icon: <PanelLeftOpen className="h-4 w-4" />,
-        },
+        // {
+        //     label: "Konten Halaman",
+        //     href: route("admin.page-contents.index"),
+        //     match: "/admin/page-contents",
+        //     icon: <PanelLeftOpen className="h-4 w-4" />,
+        // },
     ];
 
     const isActive = (match) => {

@@ -25,7 +25,7 @@ export default function Index({ products = [] }) {
                 ]}
             />
 
-            <div className="mx-auto max-w-7xl px-4 pb-12 sm:px-6 lg:px-8">
+            <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                     <div className="flex items-center justify-between gap-4">
                         <div>
@@ -39,7 +39,15 @@ export default function Index({ products = [] }) {
                                 Total produk: {products.length}
                             </p>
                         </div>
-                        <Badge variant="muted">Daftar</Badge>
+                        <div className="flex items-center gap-3">
+                            <Link
+                                href={route("admin.products.create")}
+                                className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-accent px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
+                            >
+                                Tambah Produk
+                            </Link>
+                            <Badge variant="muted">Daftar</Badge>
+                        </div>
                     </div>
 
                     <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-base/80">
@@ -126,7 +134,7 @@ export default function Index({ products = [] }) {
                                     <tr>
                                         <td
                                             className="px-4 py-10 text-center text-muted"
-                                            colSpan={3}
+                                            colSpan={4}
                                         >
                                             Belum ada produk.
                                         </td>

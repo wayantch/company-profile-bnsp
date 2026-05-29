@@ -28,104 +28,109 @@ export default function Index({ clients = [] }) {
 
             <div className="px-4 pb-12 sm:px-6 lg:px-8">
                 <div className="grid gap-8">
-                    <Card className="border-stone-200 bg-white p-6 shadow-sm">
+                    <Card className="border-border/80 bg-surface/90 p-6 shadow-sm shadow-ink/5">
                         <div className="flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
                             <div>
-                                <h3 className="text-lg font-semibold text-stone-900">
+                                <p className="text-xs font-semibold uppercase tracking-[0.24em] text-muted">
+                                    Klien
+                                </p>
+                                <h3 className="mt-2 text-2xl font-bold tracking-tight text-text">
                                     Semua Klien
                                 </h3>
-                                <p className="mt-1 text-sm text-stone-500">
+                                <p className="mt-2 text-sm leading-6 text-muted">
                                     Total klien: {clients.length}
                                 </p>
                             </div>
 
                             <Link
                                 href={route("admin.clients.create")}
-                                className="inline-flex items-center justify-center rounded-2xl bg-stone-900 px-4 py-2.5 text-sm font-medium text-stone-50 transition hover:bg-stone-800"
+                                className="inline-flex items-center justify-center rounded-2xl bg-gradient-to-r from-primary to-accent px-4 py-2 text-sm font-semibold text-white transition hover:opacity-90"
                             >
                                 Tambah Klien
                             </Link>
                         </div>
 
-                        <div className="mt-6 grid gap-4 md:grid-cols-3">
-                            {clients.length ? (
-                                clients.map((client) => (
-                                    <article
-                                        key={client.id}
-                                        className="overflow-hidden rounded-3xl border border-stone-200 bg-stone-50 transition hover:-translate-y-0.5 hover:border-stone-300 hover:bg-white"
-                                    >
-                                        <div className="aspect-[16/10] bg-stone-200">
-                                            {client.logo_path ? (
-                                                <img
-                                                    src={client.logo_path}
-                                                    alt={client.name}
-                                                    className="h-full w-full object-contain bg-white p-6"
-                                                />
-                                            ) : (
-                                                <div className="flex h-full items-center justify-center bg-gradient-to-br from-stone-200 to-stone-100 text-xs uppercase tracking-[0.24em] text-stone-500">
-                                                    No Logo
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="p-5">
-                                            <div className="flex items-center justify-between gap-3">
-                                                <Badge variant="accent">
-                                                    Order {client.order ?? 0}
-                                                </Badge>
-                                            </div>
-
-                                            <h4 className="mt-4 line-clamp-2 text-xl font-semibold tracking-tight text-stone-900 [overflow-wrap:anywhere]">
-                                                {client.name}
-                                            </h4>
-
-                                            <p className="mt-3 line-clamp-3 [overflow-wrap:anywhere] text-sm leading-7 text-stone-600">
-                                                {client.description ||
-                                                    "Deskripsi belum tersedia"}
-                                            </p>
-
-                                            <div className="mt-4 text-xs text-stone-400 [overflow-wrap:anywhere]">
-                                                {client.website ||
-                                                    "Website belum diisi"}
-                                            </div>
-
-                                            <div className="mt-5 flex flex-wrap gap-2">
-                                                <Link
-                                                    href={route(
-                                                        "admin.clients.show",
-                                                        client.id,
-                                                    )}
-                                                    className="rounded-xl border border-stone-200 px-3 py-2 text-xs font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
-                                                >
-                                                    Lihat
-                                                </Link>
-                                                <Link
-                                                    href={route(
-                                                        "admin.clients.edit",
-                                                        client.id,
-                                                    )}
-                                                    className="rounded-xl border border-stone-200 px-3 py-2 text-xs font-medium text-stone-700 transition hover:border-stone-400 hover:text-stone-900"
-                                                >
-                                                    Edit
-                                                </Link>
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        handleDelete(client.id)
-                                                    }
-                                                    className="rounded-xl border border-rose-200 px-3 py-2 text-xs font-medium text-rose-600 transition hover:border-rose-300 hover:bg-rose-50"
-                                                >
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </article>
-                                ))
-                            ) : (
-                                <div className="rounded-3xl border border-dashed border-stone-200 bg-stone-50 p-6 text-sm text-stone-500 md:col-span-2 xl:col-span-3">
-                                    Belum ada klien.
-                                </div>
-                            )}
+                        <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-base/80">
+                            <table className="min-w-full divide-y divide-border text-sm">
+                                <thead className="bg-secondary/50 text-muted">
+                                    <tr>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Nama
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Website
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Order
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-border bg-base/80">
+                                    {clients.length ? (
+                                        clients.map((client) => (
+                                            <tr
+                                                key={client.id}
+                                                className="align-top hover:bg-secondary/40"
+                                            >
+                                                <td className="px-4 py-4 font-medium text-text [overflow-wrap:anywhere]">
+                                                    {client.name}
+                                                </td>
+                                                <td className="px-4 py-4 text-muted [overflow-wrap:anywhere]">
+                                                    {client.website || "-"}
+                                                </td>
+                                                <td className="px-4 py-4 text-muted">
+                                                    {client.order ?? 0}
+                                                </td>
+                                                <td className="px-4 py-4">
+                                                    <div className="flex flex-wrap gap-2">
+                                                        <Link
+                                                            href={route(
+                                                                "admin.clients.show",
+                                                                client.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-medium text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Lihat
+                                                        </Link>
+                                                        <Link
+                                                            href={route(
+                                                                "admin.clients.edit",
+                                                                client.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-medium text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    client.id,
+                                                                )
+                                                            }
+                                                            className="rounded-xl border border-rose-200 px-3 py-2 text-xs font-medium text-rose-600 transition hover:border-rose-300 hover:bg-rose-50"
+                                                        >
+                                                            Hapus
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td
+                                                className="px-4 py-10 text-center text-muted"
+                                                colSpan={4}
+                                            >
+                                                Belum ada klien.
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
                     </Card>
                 </div>

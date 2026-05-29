@@ -68,6 +68,9 @@ class DatabaseSeeder extends Seeder
             Product::updateOrCreate(['name' => $prod['name']], $prod);
         }
 
+        // Seed categories
+        $this->call(\Database\Seeders\CategorySeeder::class);
+
         // 3. Clients
         $clients = [
             [
@@ -188,6 +191,13 @@ class DatabaseSeeder extends Seeder
         ];
 
         foreach ($articles as $art) {
+            // try to find category by slug
+            $slug = \Illuminate\Support\Str::slug($art['category'] ?? '');
+            $category = \App\Models\Category::where('slug', $slug)->first();
+            if ($category) {
+                $art['category_id'] = $category->id;
+                $art['category'] = $category->name;
+            }
             Article::updateOrCreate(['title' => $art['title']], $art);
         }
 

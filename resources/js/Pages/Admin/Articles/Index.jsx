@@ -62,101 +62,104 @@ export default function Index({ articles = [] }) {
                             </Link>
                         </div>
 
-                        <div className="mt-6 grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
-                            {articles.length ? (
-                                articles.map((article) => (
-                                    <article
-                                        key={article.id}
-                                        className="group overflow-hidden rounded-[1.75rem] border border-border bg-base/80 transition duration-300 hover:-translate-y-1 hover:border-primary/20 hover:bg-secondary/40 hover:shadow-lg hover:shadow-ink/5"
-                                    >
-                                        <div className="aspect-[16/10] bg-secondary">
-                                            {article.thumbnail ? (
-                                                <img
-                                                    src={article.thumbnail}
-                                                    alt={article.title}
-                                                    className="h-full w-full object-cover transition duration-500 group-hover:scale-105"
-                                                />
-                                            ) : (
-                                                <div className="flex h-full items-center justify-center bg-gradient-to-br from-secondary to-base text-xs font-semibold uppercase tracking-[0.24em] text-muted">
-                                                    No Thumbnail
-                                                </div>
-                                            )}
-                                        </div>
-
-                                        <div className="p-5">
-                                            <div className="flex items-center justify-between gap-3">
-                                                <Badge variant="accent">
-                                                    {article.category}
-                                                </Badge>
-                                                <Badge
-                                                    variant={
-                                                        article.is_published
-                                                            ? "primary"
-                                                            : "muted"
-                                                    }
-                                                >
-                                                    {article.is_published
-                                                        ? "Terbit"
-                                                        : "Draf"}
-                                                </Badge>
-                                            </div>
-
-                                            <h4 className="mt-4 line-clamp-2 text-xl font-semibold tracking-tight text-text">
-                                                {article.title}
-                                            </h4>
-
-                                            <p className="mt-3 line-clamp-2 text-sm leading-7 text-muted">
-                                                {article.content}
-                                            </p>
-
-                                            <div className="mt-4 flex items-center justify-between text-xs text-muted">
-                                                <span>
+                        <div className="mt-6 overflow-hidden rounded-3xl border border-border bg-base/80">
+                            <table className="min-w-full divide-y divide-border text-sm">
+                                <thead className="bg-secondary/50 text-muted">
+                                    <tr>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Judul
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Kategori
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Status
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Penulis
+                                        </th>
+                                        <th className="px-4 py-3 text-left font-medium uppercase tracking-[0.2em]">
+                                            Aksi
+                                        </th>
+                                    </tr>
+                                </thead>
+                                <tbody className="divide-y divide-border bg-base/80">
+                                    {articles.length ? (
+                                        articles.map((article) => (
+                                            <tr
+                                                key={article.id}
+                                                className="hover:bg-secondary/40"
+                                            >
+                                                <td className="px-4 py-3 font-medium text-text">
+                                                    {article.title}
+                                                </td>
+                                                <td className="px-4 py-3 text-muted">
+                                                    {article.category?.name ||
+                                                        article.category}
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <Badge
+                                                        variant={
+                                                            article.is_published
+                                                                ? "primary"
+                                                                : "muted"
+                                                        }
+                                                    >
+                                                        {article.is_published
+                                                            ? "Terbit"
+                                                            : "Draf"}
+                                                    </Badge>
+                                                </td>
+                                                <td className="px-4 py-3 text-muted">
                                                     {article.author || "Admin"}
-                                                </span>
-                                                <span>
-                                                    {formatDate(
-                                                        article.created_at,
-                                                    )}
-                                                </span>
-                                            </div>
-
-                                            <div className="mt-5 flex flex-wrap gap-2">
-                                                <Link
-                                                    href={route(
-                                                        "admin.articles.show",
-                                                        article.id,
-                                                    )}
-                                                    className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
-                                                >
-                                                    Lihat
-                                                </Link>
-                                                <Link
-                                                    href={route(
-                                                        "admin.articles.edit",
-                                                        article.id,
-                                                    )}
-                                                    className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
-                                                >
-                                                    Edit
-                                                </Link>
-                                                <button
-                                                    type="button"
-                                                    onClick={() =>
-                                                        handleDelete(article.id)
-                                                    }
-                                                    className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-300 hover:bg-rose-100"
-                                                >
-                                                    Hapus
-                                                </button>
-                                            </div>
-                                        </div>
-                                    </article>
-                                ))
-                            ) : (
-                                <div className="rounded-3xl border border-dashed border-border bg-base/70 p-6 text-sm text-muted sm:col-span-2 xl:col-span-3">
-                                    Belum ada artikel.
-                                </div>
-                            )}
+                                                </td>
+                                                <td className="px-4 py-3">
+                                                    <div className="flex items-center gap-2">
+                                                        <Link
+                                                            href={route(
+                                                                "admin.articles.show",
+                                                                article.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Lihat
+                                                        </Link>
+                                                        <Link
+                                                            href={route(
+                                                                "admin.articles.edit",
+                                                                article.id,
+                                                            )}
+                                                            className="rounded-xl border border-border bg-surface px-3 py-2 text-xs font-semibold text-text transition hover:border-primary/25 hover:bg-secondary/70"
+                                                        >
+                                                            Edit
+                                                        </Link>
+                                                        <button
+                                                            type="button"
+                                                            onClick={() =>
+                                                                handleDelete(
+                                                                    article.id,
+                                                                )
+                                                            }
+                                                            className="rounded-xl border border-rose-200 bg-rose-50 px-3 py-2 text-xs font-semibold text-rose-600 transition hover:border-rose-300 hover:bg-rose-100"
+                                                        >
+                                                            Hapus
+                                                        </button>
+                                                    </div>
+                                                </td>
+                                            </tr>
+                                        ))
+                                    ) : (
+                                        <tr>
+                                            <td
+                                                className="px-4 py-10 text-center text-muted"
+                                                colSpan={5}
+                                            >
+                                                Belum ada artikel.
+                                            </td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
                         </div>
                     </Card>
 

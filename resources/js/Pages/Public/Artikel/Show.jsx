@@ -7,11 +7,13 @@ export default function Show({ article, relatedArticles }) {
             <section className="bg-base">
                 <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-20 lg:py-24">
                     <div className="grid gap-10 lg:grid-cols-[1fr_0.4fr]">
-                        <article className="rounded-3xl border border-border bg-surface/80 p-6 lg:p-8 shadow-sm shadow-ink/5 backdrop-blur-sm">
-                            <p className="text-xs uppercase tracking-[0.25em] text-primary">
-                                {article.category}
+                        <article className="rounded-3xl border border-border bg-surface/90 p-6 lg:p-8 shadow-sm shadow-ink/5 backdrop-blur-sm">
+                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">
+                                {article.category?.name ||
+                                    article.category ||
+                                    "Artikel"}
                             </p>
-                            <h1 className="mt-4 text-4xl font-semibold text-text">
+                            <h1 className="mt-4 text-4xl font-bold tracking-tight text-text">
                                 {article.title}
                             </h1>
                             <div className="mt-4 flex flex-wrap gap-4 text-sm text-muted">
@@ -26,8 +28,8 @@ export default function Show({ article, relatedArticles }) {
                         </article>
 
                         <aside className="space-y-4">
-                            <div className="rounded-3xl border border-border bg-surface/80 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm">
-                                <p className="text-xs uppercase tracking-[0.25em] text-muted">
+                            <div className="rounded-3xl border border-border bg-surface/90 p-6 shadow-sm shadow-ink/5 backdrop-blur-sm">
+                                <p className="text-xs font-semibold uppercase tracking-[0.25em] text-muted">
                                     Artikel Terkait
                                 </p>
                                 <div className="mt-4 space-y-4">
@@ -38,10 +40,12 @@ export default function Show({ article, relatedArticles }) {
                                                 "articles.show",
                                                 item.slug,
                                             )}
-                                            className="block rounded-2xl border border-border bg-base p-4 transition hover:border-primary/30 hover:bg-secondary/70"
+                                            className="block rounded-2xl border border-border bg-base p-4 transition hover:border-primary/25 hover:bg-secondary/70"
                                         >
-                                            <p className="text-xs uppercase tracking-[0.25em] text-primary">
-                                                {item.category}
+                                            <p className="text-xs font-semibold uppercase tracking-[0.22em] text-muted">
+                                                {item.category?.name ||
+                                                    item.category ||
+                                                    "Artikel"}
                                             </p>
                                             <p className="mt-2 text-sm font-semibold text-text">
                                                 {item.title}

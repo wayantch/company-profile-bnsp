@@ -3,6 +3,7 @@ import PageHeader from "@/Components/Layout/PageHeader";
 import Card from "@/Components/UI/Card";
 import Badge from "@/Components/UI/Badge";
 import { Head, Link, useForm } from "@inertiajs/react";
+import { useState, useEffect } from "react";
 
 export default function Edit({ product }) {
     const { data, setData, post, processing, errors } = useForm({
@@ -14,6 +15,16 @@ export default function Edit({ product }) {
         order: product.order ?? 0,
         thumbnail: product.thumbnail || null,
     });
+
+    const [previewUrl, setPreviewUrl] = useState(product.thumbnail || null);
+
+    useEffect(() => {
+        return () => {
+            if (previewUrl && typeof previewUrl !== "string") {
+                URL.revokeObjectURL(previewUrl);
+            }
+        };
+    }, [previewUrl]);
 
     const handleSubmit = (e) => {
         e.preventDefault();
@@ -180,12 +191,20 @@ export default function Edit({ product }) {
                                 <input
                                     type="file"
                                     accept="image/*"
-                                    onChange={(e) =>
-                                        setData(
-                                            "thumbnail",
-                                            e.target.files?.[0] ?? null,
-                                        )
-                                    }
+                                    onChange={(e) => {
+                                        const file =
+                                            e.target.files?.[0] ?? null;
+                                        setData("thumbnail", file);
+                                        if (file) {
+                                            const url =
+                                                URL.createObjectURL(file);
+                                            setPreviewUrl(url);
+                                        } else {
+                                            setPreviewUrl(
+                                                product.thumbnail || null,
+                                            );
+                                        }
+                                    }}
                                     className="w-full rounded-2xl border border-border bg-base px-4 py-3 text-sm text-muted file:mr-4 file:rounded-xl file:border-0 file:bg-primary file:px-4 file:py-2 file:text-sm file:font-semibold file:text-white"
                                 />
                                 {errors.thumbnail && (
@@ -217,6 +236,15 @@ export default function Edit({ product }) {
                         <p className="text-xs font-semibold uppercase tracking-[0.28em] text-muted">
                             Preview
                         </p>
+                        {previewUrl ? (
+                            <div className="rounded-xl overflow-hidden mt-3">
+                                <img
+                                    src={previewUrl}
+                                    alt={data.name || product.name}
+                                    className="w-full h-40 object-cover rounded-xl"
+                                />
+                            </div>
+                        ) : null}
                         <h4 className="mt-3 text-3xl font-bold tracking-tight text-text [overflow-wrap:anywhere]">
                             {data.name || "Nama produk akan tampil di sini"}
                         </h4>

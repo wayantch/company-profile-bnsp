@@ -307,6 +307,28 @@ export default function Home({
         "Menjaga integritas dan profesionalisme dalam setiap proyek.",
     ];
 
+    // Hardcoded layanan (services) — purposely static per user request
+    const services = [
+        {
+            name: "Pengembangan Web",
+            category: "Web Development",
+            short_description:
+                "Pembuatan aplikasi dan website responsif, CMS, dan portal e-commerce menggunakan teknologi modern.",
+        },
+        {
+            name: "Aplikasi Mobile",
+            category: "Mobile Apps",
+            short_description:
+                "Aplikasi mobile native dan cross-platform yang terintegrasi dengan backend yang handal.",
+        },
+        {
+            name: "Konsultasi IT",
+            category: "Consulting",
+            short_description:
+                "Audit teknologi, arsitektur solusi, dan roadmap produk untuk mempercepat keputusan bisnis.",
+        },
+    ];
+
     return (
         <PublicLayout title="Beranda">
             <Head title="Beranda | Wynnsea" />
@@ -586,9 +608,9 @@ export default function Home({
                     </div>
 
                     <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
-                        {(featuredProducts || []).map((product, i) => (
+                        {services.map((product, i) => (
                             <article
-                                key={product.id}
+                                key={i}
                                 className="group relative overflow-hidden rounded-3xl border border-white/15 bg-white/10 p-6 backdrop-blur-sm transition hover:border-white/30 hover:bg-white/15"
                             >
                                 {/* Product number watermark */}
@@ -642,7 +664,7 @@ export default function Home({
                                 </Link>
                             </article>
                         ))}
-                        {!featuredProducts?.length && (
+                        {!services?.length && (
                             <div className="col-span-full rounded-3xl border border-dashed border-white/20 p-8 text-center text-sm text-white/40">
                                 Layanan unggulan belum tersedia.
                             </div>

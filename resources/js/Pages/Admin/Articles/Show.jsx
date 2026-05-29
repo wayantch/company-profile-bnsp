@@ -47,7 +47,7 @@ export default function Show({ article, relatedArticles = [] }) {
                         <div className="p-6 lg:p-8">
                             <div className="flex flex-wrap items-center gap-3">
                                 <Badge variant="primary">
-                                    {article.category}
+                                    {article.category?.name || article.category}
                                 </Badge>
                                 <Badge
                                     variant={
