@@ -12,6 +12,7 @@ use App\Http\Controllers\Admin\ArticleController as AdminArticleController;
 use App\Http\Controllers\Admin\EventController as AdminEventController;
 use App\Http\Controllers\Admin\GalleryController as AdminGalleryController;
 use App\Http\Controllers\Admin\ClientController as AdminClientController;
+use App\Http\Controllers\Admin\CategoryController as AdminCategoryController;
 use App\Http\Controllers\Admin\ProductController as AdminProductController;
 use App\Http\Controllers\Admin\ContactController as AdminContactController;
 use App\Http\Controllers\Admin\PageContentController as AdminPageContentController;
@@ -42,6 +43,7 @@ Route::middleware(['auth'])->prefix('admin')->name('admin.')->group(function () 
     Route::resource('events', AdminEventController::class);
     Route::resource('galleries', AdminGalleryController::class);
     Route::resource('clients', AdminClientController::class);
+    Route::resource('categories', AdminCategoryController::class);
     Route::resource('products', AdminProductController::class);
     Route::resource('contacts', AdminContactController::class);
     Route::resource('page-contents', AdminPageContentController::class);
